@@ -1,9 +1,23 @@
 import React from 'react';
+import { TextInputProps } from 'react-native';
 
-import { Container } from './styles';
+import { Container, TextInput } from './styles';
 
-const Button: React.FC = () => {
-  return <Container />;
+interface InputProps extends TextInputProps {
+  name: string;
+  icon: string;
+}
+
+const Button: React.FC<InputProps> = ({ name, icon, ...rest }) => {
+  return (
+    <Container>
+      <TextInput
+        keyboardAppearance="dark"
+        placeholderTextColor="#666360"
+        {...rest}
+      />
+    </Container>
+  );
 };
 
 export default Button;
