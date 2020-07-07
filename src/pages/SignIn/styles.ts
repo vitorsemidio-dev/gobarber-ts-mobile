@@ -1,4 +1,5 @@
 import styled from 'styled-components/native';
+import { getBottomSpace } from 'react-native-iphone-x-helper';
 
 export const Container = styled.View`
   flex: 1;
@@ -30,7 +31,7 @@ export const CreateAccountButton = styled.TouchableOpacity`
   bottom: 0;
   right: 0;
 
-  padding: 16px 0;
+  padding: 16px 0 ${16 + getBottomSpace()}px;
 
   background: #312e38;
   border-top-width: 1px;
