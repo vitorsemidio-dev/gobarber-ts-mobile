@@ -20,6 +20,7 @@ import { Container, Title, BackToSignIn, BackToSignInText } from './styles';
 
 const SignUp: React.FC = () => {
   const navigation = useNavigation();
+
   const formRef = useRef<FormHandles>(null);
 
   const handleSignUp = useCallback((data: any) => {
@@ -51,9 +52,23 @@ const SignUp: React.FC = () => {
             >
               <Input name="name" icon="user" placeholder="Nome" />
 
-              <Input name="email" icon="mail" placeholder="E-mail" />
+              <Input
+                name="email"
+                icon="mail"
+                placeholder="E-mail"
+                autoCorrect={false}
+                autoCapitalize="none"
+                keyboardType="email-address"
+              />
 
-              <Input name="password" icon="lock" placeholder="Senha" />
+              <Input
+                name="password"
+                icon="lock"
+                placeholder="Senha"
+                secureTextEntry
+                returnKeyType="send"
+                onSubmitEditing={() => formRef.current?.submitForm()}
+              />
 
               <Button onPress={() => formRef.current?.submitForm()}>
                 Criar conta
