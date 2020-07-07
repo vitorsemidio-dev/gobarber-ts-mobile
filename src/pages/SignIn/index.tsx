@@ -55,13 +55,6 @@ const SignIn: React.FC = () => {
       await schema.validate(data, {
         abortEarly: false,
       });
-
-      // await signIn({
-      //   email: data.email,
-      //   password: data.password,
-      // });
-
-      // history.push('/dashboard');
     } catch (err) {
       if (err instanceof Yup.ValidationError) {
         const erros = getValidationErrors(err);
@@ -74,12 +67,6 @@ const SignIn: React.FC = () => {
         'Erro na autenticação',
         'Ocorreu um erro ao fazer login. Cheque as credenciais',
       );
-
-      // addToast({
-      //   type: 'error',
-      //   title: 'Erro na autenticação',
-      //   description: 'Ocorreu um erro ao fazer login. Cheque as credenciais',
-      // });
     }
   }, []);
 
