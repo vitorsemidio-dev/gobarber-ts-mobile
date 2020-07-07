@@ -1,5 +1,5 @@
 import React from 'react';
-import { Image } from 'react-native';
+import { Image, KeyboardAvoidingView, Platform } from 'react-native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import Input from '../../components/Input';
@@ -19,27 +19,33 @@ import {
 const SignIn: React.FC = () => {
   return (
     <>
-      <Container>
-        <Image source={logoImg} />
+      <KeyboardAvoidingView
+        style={{ flex: 1 }}
+        enabled
+        behavior={Platform.OS === 'ios' ? 'padding' : undefined}
+      >
+        <Container>
+          <Image source={logoImg} />
 
-        <Title> Faça seu logon</Title>
+          <Title> Faça seu logon</Title>
 
-        <Input name="email" icon="mail" placeholder="E-mail" />
+          <Input name="email" icon="mail" placeholder="E-mail" />
 
-        <Input name="password" icon="lock" placeholder="Senha" />
+          <Input name="password" icon="lock" placeholder="Senha" />
 
-        <Button
-          onPress={() => {
-            console.log('hahaha');
-          }}
-        >
-          Entrar
-        </Button>
+          <Button
+            onPress={() => {
+              console.log('hahaha');
+            }}
+          >
+            Entrar
+          </Button>
 
-        <ForgotPassword>
-          <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
-        </ForgotPassword>
-      </Container>
+          <ForgotPassword>
+            <ForgotPasswordText>Esqueci minha senha</ForgotPasswordText>
+          </ForgotPassword>
+        </Container>
+      </KeyboardAvoidingView>
 
       <CreateAccountButton
         onPress={() => {
