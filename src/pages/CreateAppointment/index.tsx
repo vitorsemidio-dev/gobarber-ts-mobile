@@ -1,5 +1,5 @@
-import React from 'react';
-import { useRoute } from '@react-navigation/native';
+import React, { useCallback } from 'react';
+import { useRoute, useNavigation } from '@react-navigation/native';
 import Icon from 'react-native-vector-icons/Feather';
 
 import { useAuth } from '../../hooks/auth';
@@ -17,15 +17,20 @@ interface RouteParams {
 }
 
 const CreateAppointment: React.FC = () => {
-  const route = useRoute();
   const { user } = useAuth();
+  const route = useRoute();
+  const { goBack } = useNavigation();
 
   const { provider_id } = route.params as RouteParams;
+
+  const navigateBack = useCallback(() => {
+    goBack();
+  }, [goBack]);
 
   return (
     <Container>
       <Header>
-        <BackButton>
+        <BackButton onPress={navigateBack}>
           <Icon name="chevron-left" size={24} color="#999591" />
         </BackButton>
 
