@@ -12,6 +12,12 @@ import {
   UserAvatar,
 } from './styles';
 
+export interface Provider {
+  id: string;
+  name: string;
+  avatar_url: string;
+}
+
 const Dashboard: React.FC = () => {
   const { signOut, user } = useAuth();
 
