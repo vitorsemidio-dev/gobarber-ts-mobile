@@ -33,13 +33,15 @@ const CreateAppointment: React.FC = () => {
   const route = useRoute();
   const { goBack } = useNavigation();
 
-  const { provider_id } = route.params as RouteParams;
+  const routeParams = route.params as RouteParams;
 
   const [providers, setProviders] = useState<Provider[]>([]);
+  const [selectedProvider, setSelectedProvider] = useState(
+    routeParams.provider_id,
+  );
 
   useEffect(() => {
     api.get<Provider[]>('providers').then((response) => {
-      console.log(response.data);
       setProviders(response.data);
     });
   }, []);
@@ -47,6 +49,10 @@ const CreateAppointment: React.FC = () => {
   const navigateBack = useCallback(() => {
     goBack();
   }, [goBack]);
+
+  const handleSelectProvider = useCallback((provider_id: string) => {
+    setSelectedProvider(provider_id);
+  }, []);
 
   return (
     <Container>
@@ -67,7 +73,10 @@ const CreateAppointment: React.FC = () => {
           data={providers}
           keyExtractor={(provider) => provider.id}
           renderItem={({ item: provider }) => (
-            <ProviderContainer>
+            <ProviderContainer
+              onPress={() => handleSelectProvider(provider.id)}
+              selected={provider.id === selectedProvider}
+            >
               <ProviderAvatar
                 source={{
                   uri:
@@ -75,7 +84,9 @@ const CreateAppointment: React.FC = () => {
                     'https://api.adorable.io/avatars/56/abott@adorable.png',
                 }}
               />
-              <ProviderName>{provider.name}</ProviderName>
+              <ProviderName selected={provider.id === selectedProvider}>
+                {provider.name}
+              </ProviderName>
             </ProviderContainer>
           )}
         />
