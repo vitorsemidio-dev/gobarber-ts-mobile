@@ -13,6 +13,9 @@ import {
   UserAvatar,
   ProvidersList,
   ProvidersListContainer,
+  ProviderContainer,
+  ProviderName,
+  ProviderAvatar,
 } from './styles';
 
 export interface Provider {
@@ -64,7 +67,16 @@ const CreateAppointment: React.FC = () => {
           data={providers}
           keyExtractor={(provider) => provider.id}
           renderItem={({ item: provider }) => (
-            <HeaderTitle>{provider.name}</HeaderTitle>
+            <ProviderContainer>
+              <ProviderAvatar
+                source={{
+                  uri:
+                    provider.avatar_url ||
+                    'https://api.adorable.io/avatars/56/abott@adorable.png',
+                }}
+              />
+              <ProviderName>{provider.name}</ProviderName>
+            </ProviderContainer>
           )}
         />
       </ProvidersListContainer>
