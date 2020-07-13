@@ -1,8 +1,8 @@
 import React from 'react';
 import { View } from 'react-native';
 
-const CreatedAppointment: React.FC = () => {
+const CreateAppointment: React.FC = () => {
   return <View />;
 };
 
-export default CreatedAppointment;
+export default CreateAppointment;
