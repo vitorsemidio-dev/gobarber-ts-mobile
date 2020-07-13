@@ -20,6 +20,7 @@ import {
   ProviderName,
   ProviderMeta,
   ProviderMetaText,
+  ProviderListTitle,
 } from './styles';
 
 export interface Provider {
@@ -61,6 +62,9 @@ const Dashboard: React.FC = () => {
       <ProviderList
         keyExtractor={(provider) => provider.id}
         data={providers}
+        ListHeaderComponent={
+          <ProviderListTitle> Cabeleireiros</ProviderListTitle>
+        }
         renderItem={({ item: provider }) => (
           <ProviderContainer onPress={() => {}}>
             <ProviderAvatar
