@@ -43,3 +43,23 @@ export const UserAvatar = styled.Image`
 `;
 
 export const ProviderList = styled(FlatList as new () => FlatList<Provider>)``;
+
+export const ProviderContainer = styled.View``;
+
+export const ProviderAvatar = styled.Image``;
+
+export const ProviderInfo = styled.View`
+  /*  */
+`;
+
+export const ProviderName = styled.Text`
+  /*  */
+`;
+
+export const ProviderMeta = styled.View`
+  /*  */
+`;
+
+export const ProviderMetaText = styled.Text`
+  /*  */
+`;

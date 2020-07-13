@@ -1,6 +1,7 @@
 import React, { useCallback, useEffect, useState } from 'react';
-
 import { useNavigation } from '@react-navigation/native';
+import Icon from 'react-native-vector-icons/Feather';
+
 import { useAuth } from '../../hooks/auth';
 
 import api from '../../services/api';
@@ -13,6 +14,12 @@ import {
   ProfileButton,
   UserAvatar,
   ProviderList,
+  ProviderContainer,
+  ProviderAvatar,
+  ProviderInfo,
+  ProviderName,
+  ProviderMeta,
+  ProviderMetaText,
 } from './styles';
 
 export interface Provider {
@@ -54,7 +61,31 @@ const Dashboard: React.FC = () => {
       <ProviderList
         keyExtractor={(provider) => provider.id}
         data={providers}
-        renderItem={({ item }) => <UserName>{item.name}</UserName>}
+        renderItem={({ item: provider }) => (
+          <ProviderContainer onPress={() => {}}>
+            <ProviderAvatar
+              source={{
+                uri:
+                  provider.avatar_url ||
+                  'https://api.adorable.io/avatars/56/abott@adorable.png',
+              }}
+            />
+
+            <ProviderInfo>
+              <ProviderName>{provider.name}</ProviderName>
+
+              <ProviderMeta>
+                <Icon name="calendar" size={14} color="#ff9000" />
+                <ProviderMetaText>Segunda `a sexta</ProviderMetaText>
+              </ProviderMeta>
+
+              <ProviderMeta>
+                <Icon name="clock" size={14} color="#ff9000" />
+                <ProviderMetaText>8h às 18h</ProviderMetaText>
+              </ProviderMeta>
+            </ProviderInfo>
+          </ProviderContainer>
+        )}
       />
     </Container>
   );
