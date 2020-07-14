@@ -39,6 +39,7 @@
       }
     ],
     "camelcase": "off",
+    "import/no-duplicates": "off",
     "react/jsx-one-expression-per-line": "off",
     "import/extensions": [
       "error",
