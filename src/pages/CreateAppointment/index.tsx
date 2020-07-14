@@ -24,6 +24,11 @@ import {
   OpenDatePickerButtonText,
 } from './styles';
 
+interface AvailabilityItem {
+  hour: number;
+  available: boolean;
+}
+
 export interface Provider {
   id: string;
   name: string;
@@ -47,12 +52,30 @@ const CreateAppointment: React.FC = () => {
   );
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [availability, setAvailability] = useState<AvailabilityItem[]>([]);
 
   useEffect(() => {
     api.get<Provider[]>('providers').then((response) => {
       setProviders(response.data);
     });
   }, []);
+
+  useEffect(() => {
+    api
+      .get<AvailabilityItem[]>(
+        `providers/${selectedProvider}/day-availability`,
+        {
+          params: {
+            year: selectedDate.getFullYear(),
+            month: selectedDate.getMonth() + 1,
+            day: selectedDate.getDate(),
+          },
+        },
+      )
+      .then((response) => {
+        setAvailability(response.data);
+      });
+  }, [selectedDate, selectedProvider]);
 
   const navigateBack = useCallback(() => {
     goBack();
