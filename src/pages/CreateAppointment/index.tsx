@@ -217,16 +217,6 @@ const CreateAppointment: React.FC = () => {
           </SectionContent>
         </Section>
       </Schedule>
-
-      {/* <CalendarTitle>Manhã</CalendarTitle>
-      {morningAvailability.map(({ hourFormatted }) => (
-        <CalendarTitle key={hourFormatted}>{hourFormatted}</CalendarTitle>
-      ))}
-
-      <CalendarTitle>Tarde</CalendarTitle>
-      {afternoonAvailability.map(({ hourFormatted }) => (
-        <CalendarTitle key={hourFormatted}>{hourFormatted}</CalendarTitle>
-      ))} */}
     </Container>
   );
 };
