@@ -65,6 +65,7 @@ const CreateAppointment: React.FC = () => {
   );
   const [showDatePicker, setShowDatePicker] = useState(false);
   const [selectedDate, setSelectedDate] = useState(new Date());
+  const [selectedHour, setSelectedHour] = useState(0);
   const [availability, setAvailability] = useState<AvailabilityItem[]>([]);
 
   useEffect(() => {
@@ -86,6 +87,7 @@ const CreateAppointment: React.FC = () => {
         },
       )
       .then((response) => {
+        setSelectedHour(0);
         setAvailability(response.data);
       });
   }, [selectedDate, selectedProvider]);
@@ -114,6 +116,10 @@ const CreateAppointment: React.FC = () => {
     },
     [],
   );
+
+  const handleSelectHour = useCallback((hourNumber) => {
+    setSelectedHour(hourNumber);
+  }, []);
 
   const morningAvailability = useMemo(() => {
     return availability
@@ -214,9 +220,17 @@ const CreateAppointment: React.FC = () => {
           <Section>
             <SectionTitle>Manhã</SectionTitle>
             <SectionContent>
-              {morningAvailability.map(({ hourFormatted, available }) => (
-                <Hour key={hourFormatted} available={available}>
-                  <HourText>{hourFormatted}</HourText>
+              {morningAvailability.map(({ hourFormatted, hour, available }) => (
+                <Hour
+                  key={hourFormatted}
+                  enabled={available}
+                  onPress={() => handleSelectHour(hour)}
+                  selected={selectedHour === hour}
+                  available={available}
+                >
+                  <HourText selected={selectedHour === hour}>
+                    {hourFormatted}
+                  </HourText>
                 </Hour>
               ))}
             </SectionContent>
@@ -225,11 +239,21 @@ const CreateAppointment: React.FC = () => {
           <Section>
             <SectionTitle>Tarde</SectionTitle>
             <SectionContent>
-              {afternoonAvailability.map(({ hourFormatted, available }) => (
-                <Hour key={hourFormatted} available={available}>
-                  <HourText>{hourFormatted}</HourText>
-                </Hour>
-              ))}
+              {afternoonAvailability.map(
+                ({ hourFormatted, hour, available }) => (
+                  <Hour
+                    key={hourFormatted}
+                    enabled={available}
+                    onPress={() => handleSelectHour(hour)}
+                    selected={selectedHour === hour}
+                    available={available}
+                  >
+                    <HourText selected={selectedHour === hour}>
+                      {hourFormatted}
+                    </HourText>
+                  </Hour>
+                ),
+              )}
             </SectionContent>
           </Section>
         </Schedule>
