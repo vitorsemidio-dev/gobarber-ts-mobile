@@ -37,7 +37,7 @@ interface ProfileFormData {
 }
 
 const Profile: React.FC = () => {
-  const { user } = useAuth();
+  const { user, updateUser } = useAuth();
 
   const navigation = useNavigation();
 
@@ -45,8 +45,8 @@ const Profile: React.FC = () => {
 
   const emailInputRef = useRef<TextInput>(null);
   const oldPasswordInputRef = useRef<TextInput>(null);
-  const newPasswordInputRef = useRef<TextInput>(null);
-  const confirmationPasswordInputRef = useRef<TextInput>(null);
+  const passwordInputRef = useRef<TextInput>(null);
+  const passwordConfirmationInputRef = useRef<TextInput>(null);
 
   const handleSignUp = useCallback(
     async (data: ProfileFormData) => {
@@ -97,7 +97,9 @@ const Profile: React.FC = () => {
             : {}),
         };
 
-        await api.put('profile', formData);
+        const response = await api.put('/profile', formData);
+
+        updateUser(response.data);
 
         Alert.alert('Perfil atualizado com sucesso');
 
@@ -116,7 +118,7 @@ const Profile: React.FC = () => {
         );
       }
     },
-    [navigation],
+    [navigation, updateUser],
   );
 
   const handleGoBack = useCallback(() => {
@@ -175,30 +177,30 @@ const Profile: React.FC = () => {
               <Input
                 containerStyle={{ marginTop: 16 }}
                 ref={oldPasswordInputRef}
-                name="password"
+                name="old_password"
                 icon="lock"
                 placeholder="Senha Atual"
                 secureTextEntry
                 returnKeyType="next"
                 textContentType="newPassword"
-                onSubmitEditing={() => newPasswordInputRef.current?.focus()}
+                onSubmitEditing={() => passwordInputRef.current?.focus()}
               />
 
               <Input
-                ref={newPasswordInputRef}
-                name="password"
+                ref={passwordInputRef}
+                name="password_confirmation"
                 icon="lock"
                 placeholder="Nova Senha"
                 secureTextEntry
                 returnKeyType="next"
                 textContentType="newPassword"
                 onSubmitEditing={() => {
-                  confirmationPasswordInputRef.current?.focus();
+                  passwordConfirmationInputRef.current?.focus();
                 }}
               />
 
               <Input
-                ref={confirmationPasswordInputRef}
+                ref={passwordConfirmationInputRef}
                 name="password"
                 icon="lock"
                 placeholder="Confirmação Senha"
