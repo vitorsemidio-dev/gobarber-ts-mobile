@@ -20,13 +20,17 @@ import {
   ProviderName,
   ProviderAvatar,
   Calendar,
-  CalendarTitle,
+  CalendarTitleText,
+  CalendarTitleContainer,
+  CalendarTitleIcon,
   OpenDatePickerButton,
   OpenDatePickerButtonText,
   Schedule,
-  ScheduleTitle,
   Section,
   SectionTitle,
+  ScheduleTitleContainer,
+  ScheduleTitleText,
+  ScheduleTitleIcon,
   SectionContent,
   Hour,
   HourText,
@@ -173,7 +177,12 @@ const CreateAppointment: React.FC = () => {
       </ProvidersListContainer>
 
       <Calendar>
-        <CalendarTitle>Escolha a data</CalendarTitle>
+        <CalendarTitleContainer>
+          <CalendarTitleText>Escolha a data</CalendarTitleText>
+          <CalendarTitleIcon>
+            <Icon name="calendar" size={24} color="#999591" />
+          </CalendarTitleIcon>
+        </CalendarTitleContainer>
 
         <OpenDatePickerButton onPress={handleToggleDatePicker}>
           <OpenDatePickerButtonText>
@@ -193,7 +202,12 @@ const CreateAppointment: React.FC = () => {
       </Calendar>
 
       <Schedule>
-        <ScheduleTitle>Escolha a hora</ScheduleTitle>
+        <ScheduleTitleContainer>
+          <ScheduleTitleText>Escolha o horário</ScheduleTitleText>
+          <ScheduleTitleIcon>
+            <Icon name="clock" size={24} color="#999591" />
+          </ScheduleTitleIcon>
+        </ScheduleTitleContainer>
 
         <Section>
           <SectionTitle>Manhã</SectionTitle>

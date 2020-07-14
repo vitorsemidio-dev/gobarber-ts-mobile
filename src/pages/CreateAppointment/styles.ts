@@ -81,11 +81,20 @@ export const ProviderName = styled.Text<ProviderNameProps>`
 
 export const Calendar = styled.View``;
 
-export const CalendarTitle = styled.Text`
+export const CalendarTitleContainer = styled.View`
+  margin: 0 24px 24px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const CalendarTitleText = styled.Text`
   font-family: 'RobotoSlab-Medium';
   color: #f4ede8;
   font-size: 24px;
-  margin: 0 24px 24px;
+`;
+
+export const CalendarTitleIcon = styled.View`
+  margin-left: 8px;
 `;
 
 export const OpenDatePickerButton = styled(RectButton)`
@@ -107,11 +116,20 @@ export const Schedule = styled.View`
   padding: 24px 0 16px;
 `;
 
-export const ScheduleTitle = styled.Text`
+export const ScheduleTitleContainer = styled.View`
+  margin: 0 24px 24px;
+  flex-direction: row;
+  align-items: center;
+`;
+
+export const ScheduleTitleText = styled.Text`
   font-family: 'RobotoSlab-Medium';
   color: #f4ede8;
   font-size: 24px;
-  margin: 0 24px 24px;
+`;
+
+export const ScheduleTitleIcon = styled.View`
+  margin-left: 8px;
 `;
 
 export const Section = styled.View`
