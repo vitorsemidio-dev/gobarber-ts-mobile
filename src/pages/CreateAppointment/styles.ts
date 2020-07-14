@@ -99,3 +99,22 @@ export const OpenDatePickerButtonText = styled.Text`
   font-size: 16px;
   color: #232129;
 `;
+
+export const Schedule = styled.View``;
+
+export const ScheduleTitle = styled.Text`
+  font-family: 'RobotoSlab-Medium';
+  color: #f4ede8;
+  font-size: 24px;
+  margin: 24px 24px;
+`;
+
+export const Section = styled.View``;
+
+export const SectionTitle = styled.Text``;
+
+export const SectionContent = styled.View``;
+
+export const Hour = styled.View``;
+
+export const HourText = styled.Text``;

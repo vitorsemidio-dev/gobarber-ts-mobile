@@ -23,6 +23,13 @@ import {
   CalendarTitle,
   OpenDatePickerButton,
   OpenDatePickerButtonText,
+  Schedule,
+  ScheduleTitle,
+  Section,
+  SectionTitle,
+  SectionContent,
+  Hour,
+  HourText,
 } from './styles';
 
 interface AvailabilityItem {
@@ -185,7 +192,33 @@ const CreateAppointment: React.FC = () => {
         )}
       </Calendar>
 
-      <CalendarTitle>Manhã</CalendarTitle>
+      <Schedule>
+        <ScheduleTitle>Escolha a hora</ScheduleTitle>
+
+        <Section>
+          <SectionTitle>Manhã</SectionTitle>
+          <SectionContent>
+            {morningAvailability.map(({ hourFormatted }) => (
+              <Hour key={hourFormatted}>
+                <HourText>{hourFormatted}</HourText>
+              </Hour>
+            ))}
+          </SectionContent>
+        </Section>
+
+        <Section>
+          <SectionTitle>Tarde</SectionTitle>
+          <SectionContent>
+            {afternoonAvailability.map(({ hourFormatted }) => (
+              <Hour key={hourFormatted}>
+                <HourText>{hourFormatted}</HourText>
+              </Hour>
+            ))}
+          </SectionContent>
+        </Section>
+      </Schedule>
+
+      {/* <CalendarTitle>Manhã</CalendarTitle>
       {morningAvailability.map(({ hourFormatted }) => (
         <CalendarTitle key={hourFormatted}>{hourFormatted}</CalendarTitle>
       ))}
@@ -193,7 +226,7 @@ const CreateAppointment: React.FC = () => {
       <CalendarTitle>Tarde</CalendarTitle>
       {afternoonAvailability.map(({ hourFormatted }) => (
         <CalendarTitle key={hourFormatted}>{hourFormatted}</CalendarTitle>
-      ))}
+      ))} */}
     </Container>
   );
 };
