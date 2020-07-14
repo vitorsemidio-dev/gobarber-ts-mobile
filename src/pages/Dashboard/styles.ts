@@ -44,7 +44,8 @@ export const UserAvatar = styled.Image`
 `;
 
 export const ProviderList = styled(FlatList as new () => FlatList<Provider>)`
-  padding: 32px 24px 16px;
+  padding: 0 24px;
+  margin-top: 16px;
 `;
 
 export const ProviderContainer = styled(RectButton)`
