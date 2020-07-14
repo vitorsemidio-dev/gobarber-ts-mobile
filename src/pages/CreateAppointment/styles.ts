@@ -5,6 +5,9 @@ import { RectButton } from 'react-native-gesture-handler';
 
 import { Provider } from './index';
 
+interface HourProps {
+  available: boolean;
+}
 interface ProviderContainerProps {
   selected: boolean;
 }
@@ -152,11 +155,13 @@ export const SectionContent = styled.ScrollView.attrs({
   showsHorizontalScrollIndicator: false,
 })``;
 
-export const Hour = styled.View`
+export const Hour = styled.View<HourProps>`
   padding: 12px;
   background: #3e3b47;
   border-radius: 10px;
   margin-right: 8px;
+
+  opacity: ${(props) => (props.available ? 1 : 0.3)};
 `;
 
 export const HourText = styled.Text`
