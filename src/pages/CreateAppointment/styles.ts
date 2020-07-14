@@ -48,9 +48,12 @@ export const UserAvatar = styled.Image`
 `;
 export const ProvidersListContainer = styled.View``;
 
-export const ProvidersList = styled(FlatList as new () => FlatList<Provider>)`
-  padding: 32px 24px;
-`;
+export const ProvidersList = styled(
+  FlatList as new () => FlatList<Provider>,
+).attrs({
+  contentContainerStyle: { paddingHorizontal: 24, paddingVertical: 32 },
+  showsHorizontalScrollIndicator: false,
+})``;
 
 export const ProviderContainer = styled(RectButton)<ProviderContainerProps>`
   background: ${(props) => (props.selected ? '#ff9000' : '#3e3b47')};
