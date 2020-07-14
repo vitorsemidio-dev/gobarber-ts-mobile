@@ -46,6 +46,9 @@ export const UserAvatar = styled.Image`
   border-radius: 28px;
   margin-left: auto;
 `;
+
+export const Content = styled.ScrollView``;
+
 export const ProvidersListContainer = styled.View``;
 
 export const ProvidersList = styled(

@@ -14,6 +14,7 @@ import {
   BackButton,
   HeaderTitle,
   UserAvatar,
+  Content,
   ProvidersList,
   ProvidersListContainer,
   ProviderContainer,
@@ -176,61 +177,63 @@ const CreateAppointment: React.FC = () => {
         />
       </ProvidersListContainer>
 
-      <Calendar>
-        <CalendarTitleContainer>
-          <CalendarTitleText>Escolha a data</CalendarTitleText>
-          <CalendarTitleIcon>
-            <Icon name="calendar" size={24} color="#999591" />
-          </CalendarTitleIcon>
-        </CalendarTitleContainer>
+      <Content>
+        <Calendar>
+          <CalendarTitleContainer>
+            <CalendarTitleText>Escolha a data</CalendarTitleText>
+            <CalendarTitleIcon>
+              <Icon name="calendar" size={24} color="#999591" />
+            </CalendarTitleIcon>
+          </CalendarTitleContainer>
 
-        <OpenDatePickerButton onPress={handleToggleDatePicker}>
-          <OpenDatePickerButtonText>
-            Selecionar outra data
-          </OpenDatePickerButtonText>
-        </OpenDatePickerButton>
+          <OpenDatePickerButton onPress={handleToggleDatePicker}>
+            <OpenDatePickerButtonText>
+              Selecionar outra data
+            </OpenDatePickerButtonText>
+          </OpenDatePickerButton>
 
-        {showDatePicker && (
-          <DateTimePicker
-            textColor="#f4ede8"
-            display="calendar"
-            mode="date"
-            onChange={handleDateChanged}
-            value={selectedDate}
-          />
-        )}
-      </Calendar>
+          {showDatePicker && (
+            <DateTimePicker
+              textColor="#f4ede8"
+              display="calendar"
+              mode="date"
+              onChange={handleDateChanged}
+              value={selectedDate}
+            />
+          )}
+        </Calendar>
 
-      <Schedule>
-        <ScheduleTitleContainer>
-          <ScheduleTitleText>Escolha o horário</ScheduleTitleText>
-          <ScheduleTitleIcon>
-            <Icon name="clock" size={24} color="#999591" />
-          </ScheduleTitleIcon>
-        </ScheduleTitleContainer>
+        <Schedule>
+          <ScheduleTitleContainer>
+            <ScheduleTitleText>Escolha o horário</ScheduleTitleText>
+            <ScheduleTitleIcon>
+              <Icon name="clock" size={24} color="#999591" />
+            </ScheduleTitleIcon>
+          </ScheduleTitleContainer>
 
-        <Section>
-          <SectionTitle>Manhã</SectionTitle>
-          <SectionContent>
-            {morningAvailability.map(({ hourFormatted }) => (
-              <Hour key={hourFormatted}>
-                <HourText>{hourFormatted}</HourText>
-              </Hour>
-            ))}
-          </SectionContent>
-        </Section>
+          <Section>
+            <SectionTitle>Manhã</SectionTitle>
+            <SectionContent>
+              {morningAvailability.map(({ hourFormatted }) => (
+                <Hour key={hourFormatted}>
+                  <HourText>{hourFormatted}</HourText>
+                </Hour>
+              ))}
+            </SectionContent>
+          </Section>
 
-        <Section>
-          <SectionTitle>Tarde</SectionTitle>
-          <SectionContent>
-            {afternoonAvailability.map(({ hourFormatted }) => (
-              <Hour key={hourFormatted}>
-                <HourText>{hourFormatted}</HourText>
-              </Hour>
-            ))}
-          </SectionContent>
-        </Section>
-      </Schedule>
+          <Section>
+            <SectionTitle>Tarde</SectionTitle>
+            <SectionContent>
+              {afternoonAvailability.map(({ hourFormatted }) => (
+                <Hour key={hourFormatted}>
+                  <HourText>{hourFormatted}</HourText>
+                </Hour>
+              ))}
+            </SectionContent>
+          </Section>
+        </Schedule>
+      </Content>
     </Container>
   );
 };
