@@ -23,7 +23,8 @@ import Button from '../../components/Button';
 
 import {
   Container,
-  BackButton,
+  ActionButton,
+  ActionsContainer,
   Title,
   UserAvatarButton,
   UserAvatar,
@@ -38,7 +39,7 @@ interface ProfileFormData {
 }
 
 const Profile: React.FC = () => {
-  const { user, updateUser } = useAuth();
+  const { user, updateUser, signOut } = useAuth();
 
   const navigation = useNavigation();
 
@@ -126,6 +127,10 @@ const Profile: React.FC = () => {
     navigation.goBack();
   }, [navigation]);
 
+  const handleSignOut = useCallback(() => {
+    signOut();
+  }, [signOut]);
+
   const handleUpdateAvatar = useCallback(() => {
     ImagePicker.showImagePicker(
       {
@@ -173,9 +178,15 @@ const Profile: React.FC = () => {
           keyboardShouldPersistTaps="handled"
         >
           <Container>
-            <BackButton onPress={handleGoBack}>
-              <Icon name="chevron-left" size={24} color="#999591" />
-            </BackButton>
+            <ActionsContainer>
+              <ActionButton onPress={handleGoBack}>
+                <Icon name="chevron-left" size={24} color="#999591" />
+              </ActionButton>
+
+              <ActionButton onPress={handleSignOut}>
+                <Icon name="power" size={24} color="#999591" />
+              </ActionButton>
+            </ActionsContainer>
 
             <UserAvatarButton onPress={handleUpdateAvatar}>
               <UserAvatar source={{ uri: user.avatar_url }} />
