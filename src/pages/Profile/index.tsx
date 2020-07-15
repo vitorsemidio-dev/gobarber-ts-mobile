@@ -12,9 +12,10 @@ import { useNavigation } from '@react-navigation/native';
 import { Form } from '@unform/mobile';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
-import api from '../../services/api';
+import ImagePicker from 'react-native-image-picker';
 
 import { useAuth } from '../../hooks/auth';
+import api from '../../services/api';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import Input from '../../components/Input';
@@ -48,7 +49,7 @@ const Profile: React.FC = () => {
   const passwordInputRef = useRef<TextInput>(null);
   const passwordConfirmationInputRef = useRef<TextInput>(null);
 
-  const handleSignUp = useCallback(
+  const handleUpdateUser = useCallback(
     async (data: ProfileFormData) => {
       try {
         formRef.current?.setErrors({});
@@ -125,6 +126,41 @@ const Profile: React.FC = () => {
     navigation.goBack();
   }, [navigation]);
 
+  const handleUpdateAvatar = useCallback(() => {
+    ImagePicker.showImagePicker(
+      {
+        title: 'Selecione um avatar',
+        cancelButtonTitle: 'Cancelar',
+        takePhotoButtonTitle: 'User câmera',
+        chooseFromLibraryButtonTitle: 'Escolher da galeria',
+      },
+      (responseImagePicker) => {
+        if (responseImagePicker.didCancel) {
+          return;
+        }
+
+        if (responseImagePicker.error) {
+          Alert.alert('Erro ao atualizar seu avatar.');
+          return;
+        }
+
+        const source = { uri: responseImagePicker.uri };
+
+        const data = new FormData();
+
+        data.append('avatar', {
+          type: 'image/jpeg',
+          name: `${user.id}.jpg`,
+          uri: source.uri,
+        });
+
+        api.patch('users/avatar', data).then((response) => {
+          updateUser(response.data);
+        });
+      },
+    );
+  }, [updateUser, user.id]);
+
   return (
     <>
       <KeyboardAvoidingView
@@ -141,7 +177,7 @@ const Profile: React.FC = () => {
               <Icon name="chevron-left" size={24} color="#999591" />
             </BackButton>
 
-            <UserAvatarButton onPress={() => {}}>
+            <UserAvatarButton onPress={handleUpdateAvatar}>
               <UserAvatar source={{ uri: user.avatar_url }} />
             </UserAvatarButton>
             <View>
@@ -152,7 +188,7 @@ const Profile: React.FC = () => {
               ref={formRef}
               initialData={user}
               style={{ width: '100%' }}
-              onSubmit={handleSignUp}
+              onSubmit={handleUpdateUser}
             >
               <Input
                 name="name"
