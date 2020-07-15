@@ -101,6 +101,7 @@ const SignIn: React.FC = () => {
             </View>
 
             <Form
+              testID="sign-in-form"
               style={{ width: '100%' }}
               ref={formRef}
               onSubmit={handleSignIn}
